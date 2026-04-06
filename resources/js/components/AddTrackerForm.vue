@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import TrackerController from '@/actions/App/Http/Controllers/TrackerController';
 import { Form } from '@inertiajs/vue3';
+import TrackerController from '@/actions/App/Http/Controllers/TrackerController';
 import Button from './ui/button/Button.vue';
-import Select from './ui/select/Select.vue';
 import Input from './ui/input/Input.vue';
-import SelectItem from './ui/select/SelectItem.vue';
-import SelectTrigger from './ui/select/SelectTrigger.vue';
+import Select from './ui/select/Select.vue';
 import SelectContent from './ui/select/SelectContent.vue';
 import SelectGroup from './ui/select/SelectGroup.vue';
+import SelectItem from './ui/select/SelectItem.vue';
+import SelectTrigger from './ui/select/SelectTrigger.vue';
 import SelectValue from './ui/select/SelectValue.vue';
 defineProps<{
     categories: Array<{ id: number; name: string }>;
