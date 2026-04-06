@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
-import { dashboard } from '@/routes';
 import AddTrackerForm from '@/components/AddTrackerForm.vue';
-import { Category, Tracker } from '@/types/tracker';
+import TrackerCard from '@/components/TrackerCard.vue';
+import { dashboard } from '@/routes';
+import type { Category, Tracker } from '@/types/tracker';
 
 defineProps<{
     categories: Category[];
@@ -36,12 +37,15 @@ defineOptions({
             </div>
         </div>
         <div
-            class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
+            class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 p-2 md:min-h-min dark:border-sidebar-border"
         >
             <h2 class="text-lg font-medium">Your Trackers</h2>
-            <ul>
+            <ul class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <li v-for="tracker in trackers" :key="tracker.id">
-                    {{ tracker.name }} - {{ tracker.category.name }}
+                    <TrackerCard
+                        :name="tracker.name"
+                        :category="tracker.category.name"
+                    />
                 </li>
             </ul>
         </div>
