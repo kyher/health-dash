@@ -30,7 +30,7 @@ class TrackerController extends Controller
     {
         $user = Auth::user();
 
-        if (!$user instanceof User) {
+        if (! $user instanceof User) {
             abort(403);
         }
 

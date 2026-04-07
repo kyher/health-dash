@@ -15,4 +15,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/trackers/{tracker}', [TrackerController::class, 'destroy'])->name('tracker.destroy');
 });
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';

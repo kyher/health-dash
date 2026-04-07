@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import TrackerController from '@/actions/App/Http/Controllers/TrackerController';
-import { Tracker } from '@/types/tracker';
 import { Form } from '@inertiajs/vue3';
+import TrackerController from '@/actions/App/Http/Controllers/TrackerController';
+import type { Tracker } from '@/types/tracker';
 
 defineProps<{
     tracker: Tracker;
