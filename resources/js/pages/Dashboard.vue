@@ -42,10 +42,7 @@ defineOptions({
             <h2 class="text-lg font-medium">Your Trackers</h2>
             <ul class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <li v-for="tracker in trackers" :key="tracker.id">
-                    <TrackerCard
-                        :name="tracker.name"
-                        :category="tracker.category.name"
-                    />
+                    <TrackerCard :tracker="tracker" />
                 </li>
             </ul>
         </div>
