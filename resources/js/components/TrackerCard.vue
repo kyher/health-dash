@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { Form } from '@inertiajs/vue3';
+import { ref } from 'vue';
 import TrackerController from '@/actions/App/Http/Controllers/TrackerController';
 import EditTrackerModal from '@/components/EditTrackerModal.vue';
 import type { Category, Tracker } from '@/types/tracker';
