@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { Form } from '@inertiajs/vue3';
 import TrackerController from '@/actions/App/Http/Controllers/TrackerController';
-import type { Tracker } from '@/types/tracker';
+import EditTrackerModal from '@/components/EditTrackerModal.vue';
+import type { Category, Tracker } from '@/types/tracker';
 
 defineProps<{
     tracker: Tracker;
+    categories: Category[];
 }>();
+
+const isEditOpen = ref(false);
 </script>
 
 <template>
@@ -14,13 +19,30 @@ defineProps<{
             <h3 class="text-xl">{{ tracker.name }}</h3>
             <p class="text-sm">{{ tracker.category.name }}</p>
         </div>
-        <Form :action="TrackerController.destroy(tracker.id)" method="delete">
+        <div class="flex gap-2">
             <button
-                type="submit"
-                class="cursor-pointer rounded bg-red-500 p-2 hover:bg-red-700"
+                type="button"
+                class="size-max cursor-pointer rounded bg-blue-500 p-2 hover:bg-blue-700"
+                @click="isEditOpen = true"
             >
-                Delete
+                Edit
             </button>
-        </Form>
+            <Form
+                :action="TrackerController.destroy(tracker.id)"
+                method="delete"
+            >
+                <button
+                    type="submit"
+                    class="size-max cursor-pointer rounded bg-red-500 p-2 hover:bg-red-700"
+                >
+                    Delete
+                </button>
+            </Form>
+        </div>
     </div>
+    <EditTrackerModal
+        v-model:is-open="isEditOpen"
+        :tracker="tracker"
+        :categories="categories"
+    />
 </template>
