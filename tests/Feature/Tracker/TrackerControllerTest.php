@@ -104,6 +104,54 @@ class TrackerControllerTest extends TestCase
     }
 
     #[Test]
+    public function test_update_tracker()
+    {
+        $user = User::factory()->create();
+        $tracker = Tracker::factory()->create(['user_id' => $user->id]);
+
+        $this->actingAs($user);
+        $response = $this->followingRedirects()->put(route('tracker.update', $tracker), [
+            'name' => 'Updated Tracker',
+            'category' => 1,
+        ]);
+
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('trackers', [
+            'id' => $tracker->id,
+            'name' => 'Updated Tracker',
+            'category_id' => 1,
+        ]);
+    }
+
+    #[Test]
+    public function test_update_tracker_unauthenticated()
+    {
+        $tracker = Tracker::factory()->create();
+
+        $response = $this->put(route('tracker.update', $tracker), [
+            'name' => 'Updated Tracker',
+            'category' => 1,
+        ]);
+
+        $response->assertRedirect(route('login'));
+    }
+
+    #[Test]
+    public function test_update_tracker_forbidden()
+    {
+        $user = User::factory()->create();
+        $tracker = Tracker::factory()->create();
+
+        $this->actingAs($user);
+        $response = $this->put(route('tracker.update', $tracker), [
+            'name' => 'Updated Tracker',
+            'category' => 1,
+        ]);
+
+        $response->assertStatus(403);
+    }
+
+    #[Test]
     public function test_destroy_tracker()
     {
         $user = User::factory()->create();
