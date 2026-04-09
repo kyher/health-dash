@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import AddTrackerForm from '@/components/AddTrackerForm.vue';
 import TrackerCard from '@/components/TrackerCard.vue';
 import { dashboard } from '@/routes';
 import type { Category, Tracker } from '@/types/tracker';
+import { Toast } from '@/components/ui/toast';
 
 defineProps<{
     categories: Category[];
@@ -20,6 +21,7 @@ defineOptions({
         ],
     },
 });
+const page = usePage();
 </script>
 
 <template>
@@ -47,4 +49,6 @@ defineOptions({
             </ul>
         </div>
     </div>
+
+    <Toast :message="page.flash.toast?.message" :type="page.flash.toast?.type" />
 </template>
