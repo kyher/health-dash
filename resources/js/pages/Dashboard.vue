@@ -50,5 +50,9 @@ const page = usePage();
         </div>
     </div>
 
-    <Toast :message="page.flash.toast?.message" :type="page.flash.toast?.type" />
+    <Toast
+        v-if="page.flash.toast"
+        :message="page.flash.toast.message"
+        :type="page.flash.toast.type"
+    />
 </template>
