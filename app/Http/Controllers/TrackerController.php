@@ -24,7 +24,13 @@ class TrackerController extends Controller
 
         $createTrackerAction($user, $category, $request->name);
 
-        return redirect()->route('dashboard')->with('success', 'Tracker added successfully!');
+        inertia()->flash([
+            'toast' => [
+                'type' => 'success',
+                'message' => 'Tracker added successfully!',
+            ],
+        ]);
+        return redirect()->route('dashboard');
     }
 
     public function update(UpdateTrackerRequest $request, Tracker $tracker)
@@ -46,7 +52,14 @@ class TrackerController extends Controller
             'category_id' => $category->id,
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Tracker updated successfully!');
+        inertia()->flash([
+            'toast' => [
+                'type' => 'success',
+                'message' => 'Tracker updated successfully!',
+            ],
+        ]);
+
+        return redirect()->route('dashboard');
     }
 
     public function destroy(Tracker $tracker)
@@ -63,6 +76,13 @@ class TrackerController extends Controller
 
         $tracker->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Tracker deleted successfully!');
+        inertia()->flash([
+            'toast' => [
+                'type' => 'success',
+                'message' => 'Tracker deleted successfully!',
+            ],
+        ]);
+
+        return redirect()->route('dashboard');
     }
 }
