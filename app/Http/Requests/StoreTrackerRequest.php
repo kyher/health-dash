@@ -11,6 +11,7 @@ class StoreTrackerRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'category' => 'required|exists:tracker_categories,id',
+            'next_appointment_at' => 'nullable|date',
         ];
     }
 }
