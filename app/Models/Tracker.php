@@ -10,7 +10,11 @@ class Tracker extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'category_id'];
+    protected $fillable = ['name', 'category_id', 'next_appointment_at'];
+
+    protected $casts = [
+        'next_appointment_at' => 'date:Y-m-d H:i',
+    ];
 
     public function user(): BelongsTo
     {

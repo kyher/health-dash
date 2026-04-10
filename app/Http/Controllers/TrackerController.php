@@ -22,7 +22,7 @@ class TrackerController extends Controller
 
         $category = TrackerCategory::findOrFail($request->category);
 
-        $createTrackerAction($user, $category, $request->name);
+        $createTrackerAction($user, $category, $request->name, $request->next_appointment_at);
 
         inertia()->flash([
             'toast' => [
@@ -30,6 +30,7 @@ class TrackerController extends Controller
                 'message' => 'Tracker added successfully!',
             ],
         ]);
+
         return redirect()->route('dashboard');
     }
 
@@ -50,6 +51,7 @@ class TrackerController extends Controller
         $tracker->update([
             'name' => $request->name,
             'category_id' => $category->id,
+            'next_appointment_at' => $request->next_appointment_at,
         ]);
 
         inertia()->flash([

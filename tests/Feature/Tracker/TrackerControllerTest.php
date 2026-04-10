@@ -104,6 +104,37 @@ class TrackerControllerTest extends TestCase
     }
 
     #[Test]
+    public function test_store_tracker_with_next_appointment_at()
+    {
+        $this->actingAs(User::factory()->create());
+        $response = $this->followingRedirects()->post(route('tracker.store'), [
+            'name' => 'New Tracker',
+            'category' => 1,
+            'next_appointment_at' => '2026-05-01 09:00',
+        ]);
+
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('trackers', [
+            'name' => 'New Tracker',
+            'next_appointment_at' => '2026-05-01 09:00',
+        ]);
+    }
+
+    #[Test]
+    public function test_store_tracker_with_invalid_next_appointment_at()
+    {
+        $this->actingAs(User::factory()->create());
+        $response = $this->post(route('tracker.store'), [
+            'name' => 'New Tracker',
+            'category' => 1,
+            'next_appointment_at' => 'not-a-date',
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHasErrors(['next_appointment_at']);
+    }
+
+    #[Test]
     public function test_update_tracker()
     {
         $user = User::factory()->create();
@@ -120,6 +151,48 @@ class TrackerControllerTest extends TestCase
             'id' => $tracker->id,
             'name' => 'Updated Tracker',
             'category_id' => 1,
+        ]);
+    }
+
+    #[Test]
+    public function test_update_tracker_with_next_appointment_at()
+    {
+        $user = User::factory()->create();
+        $tracker = Tracker::factory()->create(['user_id' => $user->id]);
+
+        $this->actingAs($user);
+        $response = $this->followingRedirects()->put(route('tracker.update', $tracker), [
+            'name' => 'Updated Tracker',
+            'category' => 1,
+            'next_appointment_at' => '2026-06-15 14:30',
+        ]);
+
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('trackers', [
+            'id' => $tracker->id,
+            'next_appointment_at' => '2026-06-15 14:30',
+        ]);
+    }
+
+    #[Test]
+    public function test_update_tracker_clears_next_appointment_at()
+    {
+        $user = User::factory()->create();
+        $tracker = Tracker::factory()->create([
+            'user_id' => $user->id,
+            'next_appointment_at' => '2026-05-01 09:00',
+        ]);
+
+        $this->actingAs($user);
+        $response = $this->followingRedirects()->put(route('tracker.update', $tracker), [
+            'name' => $tracker->name,
+            'category' => $tracker->category_id,
+        ]);
+
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('trackers', [
+            'id' => $tracker->id,
+            'next_appointment_at' => null,
         ]);
     }
 

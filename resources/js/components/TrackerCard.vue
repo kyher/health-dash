@@ -18,6 +18,12 @@ const isEditOpen = ref(false);
         <div>
             <h3 class="text-xl">{{ tracker.name }}</h3>
             <p class="text-sm">{{ tracker.category.name }}</p>
+            <p
+                v-if="tracker.next_appointment_at"
+                class="mt-1 text-sm text-muted-foreground"
+            >
+                Next appointment: {{ tracker.next_appointment_at }}
+            </p>
         </div>
         <div class="flex gap-2">
             <button
