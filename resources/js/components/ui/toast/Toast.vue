@@ -14,6 +14,7 @@ watch(
     (value) => {
         if (value) open.value = true;
     },
+    { immediate: true },
 );
 </script>
 
