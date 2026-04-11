@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Form } from '@inertiajs/vue3';
 import { ref } from 'vue';
-import TrackerController from '@/actions/App/Http/Controllers/TrackerController';
+import DeleteTrackerController from '@/actions/App/Http/Controllers/Tracker/DeleteTrackerController';
 import EditTrackerModal from '@/components/EditTrackerModal.vue';
 import type { Category, Tracker } from '@/types/tracker';
 
@@ -33,10 +33,7 @@ const isEditOpen = ref(false);
             >
                 Edit
             </button>
-            <Form
-                :action="TrackerController.destroy(tracker.id)"
-                method="delete"
-            >
+            <Form :action="DeleteTrackerController(tracker.id)" method="delete">
                 <button
                     type="submit"
                     class="size-max cursor-pointer rounded bg-red-500 p-2 hover:bg-red-700"

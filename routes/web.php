@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\TrackerController;
+use App\Http\Controllers\Tracker\DeleteTrackerController;
+use App\Http\Controllers\Tracker\StoreTrackerController;
+use App\Http\Controllers\Tracker\UpdateTrackerController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
@@ -11,9 +13,9 @@ Route::inertia('/', 'Welcome', [
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
-    Route::post('/trackers', [TrackerController::class, 'store'])->name('tracker.store');
-    Route::put('/trackers/{tracker}', [TrackerController::class, 'update'])->name('tracker.update');
-    Route::delete('/trackers/{tracker}', [TrackerController::class, 'destroy'])->name('tracker.destroy');
+    Route::post('/trackers', StoreTrackerController::class)->name('tracker.store');
+    Route::put('/trackers/{tracker}', UpdateTrackerController::class)->name('tracker.update');
+    Route::delete('/trackers/{tracker}', DeleteTrackerController::class)->name('tracker.destroy');
 });
 
 require __DIR__.'/settings.php';

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Form } from '@inertiajs/vue3';
-import TrackerController from '@/actions/App/Http/Controllers/TrackerController';
+import StoreTrackerController from '@/actions/App/Http/Controllers/Tracker/StoreTrackerController';
 import Button from './ui/button/Button.vue';
 import Input from './ui/input/Input.vue';
 import Select from './ui/select/Select.vue';
@@ -16,7 +16,7 @@ defineProps<{
 
 <template>
     <Form
-        :action="TrackerController.store()"
+        :action="StoreTrackerController()"
         method="post"
         class="flex flex-col gap-4"
         #default="{ errors }"

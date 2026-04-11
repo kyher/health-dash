@@ -2,9 +2,9 @@
 import { Head, usePage } from '@inertiajs/vue3';
 import AddTrackerForm from '@/components/AddTrackerForm.vue';
 import TrackerCard from '@/components/TrackerCard.vue';
+import { Toast } from '@/components/ui/toast';
 import { dashboard } from '@/routes';
 import type { Category, Tracker } from '@/types/tracker';
-import { Toast } from '@/components/ui/toast';
 
 defineProps<{
     categories: Category[];
