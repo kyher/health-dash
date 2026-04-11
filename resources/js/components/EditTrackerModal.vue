@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Form } from '@inertiajs/vue3';
-import TrackerController from '@/actions/App/Http/Controllers/TrackerController';
+import UpdateTrackerController from '@/actions/App/Http/Controllers/Tracker/UpdateTrackerController';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -32,7 +32,7 @@ const isOpen = defineModel<boolean>('isOpen');
                 <DialogTitle>Edit Tracker</DialogTitle>
             </DialogHeader>
             <Form
-                :action="TrackerController.update(tracker.id)"
+                :action="UpdateTrackerController(tracker.id)"
                 method="put"
                 class="flex flex-col gap-4"
                 #default="{ errors }"
@@ -48,12 +48,17 @@ const isOpen = defineModel<boolean>('isOpen');
                     placeholder="Tracker name"
                 />
                 <div class="flex flex-col gap-1">
-                    <label for="next_appointment_at" class="text-sm">Next appointment (optional)</label>
+                    <label for="next_appointment_at" class="text-sm"
+                        >Next appointment (optional)</label
+                    >
                     <Input
                         type="datetime-local"
                         name="next_appointment_at"
                         id="next_appointment_at"
-                        :default-value="tracker.next_appointment_at?.replace(' ', 'T') ?? undefined"
+                        :default-value="
+                            tracker.next_appointment_at?.replace(' ', 'T') ??
+                            undefined
+                        "
                     />
                 </div>
                 <Select name="category" :default-value="tracker.category.id">
