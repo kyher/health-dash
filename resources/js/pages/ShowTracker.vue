@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Form, Head, Link, usePage } from '@inertiajs/vue3';
+import { Form, Head, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import DeleteTrackerController from '@/actions/App/Http/Controllers/Tracker/DeleteTrackerController';
 import EditTrackerModal from '@/components/EditTrackerModal.vue';
