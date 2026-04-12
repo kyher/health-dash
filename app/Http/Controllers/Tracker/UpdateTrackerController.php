@@ -35,6 +35,6 @@ class UpdateTrackerController extends Controller
             ],
         ]);
 
-        return redirect()->route('dashboard');
+        return redirect()->back();
     }
 }

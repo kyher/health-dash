@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { Form } from '@inertiajs/vue3';
+import { Form, Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import DeleteTrackerController from '@/actions/App/Http/Controllers/Tracker/DeleteTrackerController';
+import ShowTrackerController from '@/actions/App/Http/Controllers/Tracker/ShowTrackerController';
 import EditTrackerModal from '@/components/EditTrackerModal.vue';
 import type { Category, Tracker } from '@/types/tracker';
 
@@ -16,7 +17,10 @@ const isEditOpen = ref(false);
 <template>
     <div class="flex justify-between rounded border p-4 dark:bg-slate-800/20">
         <div>
-            <h3 class="text-xl">{{ tracker.name }}</h3>
+            <Link
+                :href="ShowTrackerController(tracker.id).url"
+                class="text-xl hover:underline"
+            >{{ tracker.name }}</Link>
             <p class="text-sm">{{ tracker.category.name }}</p>
             <p
                 v-if="tracker.next_appointment_at"
