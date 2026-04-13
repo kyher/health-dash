@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tracker extends Model
 {
@@ -24,5 +25,10 @@ class Tracker extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(TrackerCategory::class);
+    }
+
+    public function notes(): HasMany
+    {
+        return $this->hasMany(TrackerNote::class);
     }
 }
