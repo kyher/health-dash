@@ -23,11 +23,11 @@ class ShowTrackerControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertInertia(
-            fn($page) => $page
+            fn ($page) => $page
                 ->component('ShowTracker')
                 ->has(
                     'tracker',
-                    fn($t) => $t
+                    fn ($t) => $t
                         ->where('id', $tracker->id)
                         ->where('name', $tracker->name)
                         ->etc()
