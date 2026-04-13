@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import DashboardController from '@/actions/App/Http/Controllers/DashboardController';
 import { Link } from '@inertiajs/vue3';
 import { MoveLeft } from 'lucide-vue-next';
+import DashboardController from '@/actions/App/Http/Controllers/DashboardController';
 </script>
 
 <template>

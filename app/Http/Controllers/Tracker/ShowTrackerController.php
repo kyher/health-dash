@@ -23,7 +23,7 @@ class ShowTrackerController extends Controller
         }
 
         return inertia('ShowTracker', [
-            'tracker' => $tracker->load('category'),
+            'tracker' => $tracker->load('category', 'notes'),
             'categories' => TrackerCategory::all(),
         ]);
     }
