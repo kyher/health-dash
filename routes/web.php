@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Tracker\DeleteTrackerAppointmentController;
 use App\Http\Controllers\Tracker\DeleteTrackerController;
 use App\Http\Controllers\Tracker\ShowTrackerController;
+use App\Http\Controllers\Tracker\StoreTrackerAppointmentController;
 use App\Http\Controllers\Tracker\StoreTrackerController;
 use App\Http\Controllers\Tracker\StoreTrackerNoteController;
 use App\Http\Controllers\Tracker\UpdateTrackerController;
@@ -20,6 +22,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/trackers/{tracker}', UpdateTrackerController::class)->name('tracker.update');
     Route::delete('/trackers/{tracker}', DeleteTrackerController::class)->name('tracker.destroy');
     Route::post('/trackers/{tracker}/notes', StoreTrackerNoteController::class)->name('tracker.notes.store');
+    Route::post('/trackers/{tracker}/appointments', StoreTrackerAppointmentController::class)->name('tracker.appointments.store');
+    Route::delete('/trackers/{tracker}/appointments/{appointment}', DeleteTrackerAppointmentController::class)->name('tracker.appointments.destroy');
 });
 
 require __DIR__.'/settings.php';

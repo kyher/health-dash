@@ -47,20 +47,6 @@ const isOpen = defineModel<boolean>('isOpen');
                     :default-value="tracker.name"
                     placeholder="Tracker name"
                 />
-                <div class="flex flex-col gap-1">
-                    <label for="next_appointment_at" class="text-sm"
-                        >Next appointment (optional)</label
-                    >
-                    <Input
-                        type="datetime-local"
-                        name="next_appointment_at"
-                        id="next_appointment_at"
-                        :default-value="
-                            tracker.next_appointment_at?.replace(' ', 'T') ??
-                            undefined
-                        "
-                    />
-                </div>
                 <Select name="category" :default-value="tracker.category.id">
                     <SelectTrigger>
                         <SelectValue placeholder="Select category" />

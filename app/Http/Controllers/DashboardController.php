@@ -11,7 +11,7 @@ class DashboardController extends Controller
     {
         return inertia('Dashboard', [
             'categories' => TrackerCategory::all(),
-            'trackers' => Auth::user()->trackers->load('category'),
+            'trackers' => Auth::user()->trackers->load('category', 'appointments'),
         ]);
     }
 }

@@ -26,7 +26,7 @@ class UpdateTrackerController extends Controller
 
         $category = TrackerCategory::findOrFail($request->category);
 
-        $updateTrackerAction($tracker, $category, $request->name, $request->next_appointment_at);
+        $updateTrackerAction($tracker, $category, $request->name);
 
         inertia()->flash([
             'toast' => [

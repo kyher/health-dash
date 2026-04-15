@@ -23,7 +23,6 @@ class TrackerFactory extends Factory
             'name' => $this->faker->word(),
             'category_id' => TrackerCategory::factory(),
             'user_id' => User::factory(),
-            'next_appointment_at' => null,
         ];
     }
 }
