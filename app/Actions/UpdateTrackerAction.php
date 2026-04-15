@@ -7,12 +7,11 @@ use App\Models\TrackerCategory;
 
 class UpdateTrackerAction
 {
-    public function __invoke(Tracker $tracker, TrackerCategory $category, string $name, ?string $nextAppointmentAt = null)
+    public function __invoke(Tracker $tracker, TrackerCategory $category, string $name)
     {
         $tracker->update([
             'name' => $name,
             'category_id' => $category->id,
-            'next_appointment_at' => $nextAppointmentAt,
         ]);
 
         return $tracker;

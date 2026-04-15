@@ -1,17 +1,36 @@
 <script setup lang="ts">
 import { Form, Link } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import DeleteTrackerController from '@/actions/App/Http/Controllers/Tracker/DeleteTrackerController';
 import ShowTrackerController from '@/actions/App/Http/Controllers/Tracker/ShowTrackerController';
 import EditTrackerModal from '@/components/EditTrackerModal.vue';
-import type { Category, Tracker } from '@/types/tracker';
+import type { Category, Tracker, TrackerAppointment } from '@/types/tracker';
 
-defineProps<{
+const props = defineProps<{
     tracker: Tracker;
     categories: Category[];
 }>();
 
 const isEditOpen = ref(false);
+
+const nextAppointment = computed<TrackerAppointment | null>(() => {
+    const now = new Date();
+    const upcoming = props.tracker.appointments
+        .filter((a) => new Date(a.appointment_at) > now)
+        .sort((a, b) => new Date(a.appointment_at).getTime() - new Date(b.appointment_at).getTime());
+
+    return upcoming[0] ?? null;
+});
+
+function formatDate(dateString: string): string {
+    return new Date(dateString).toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+}
 </script>
 
 <template>
@@ -23,10 +42,10 @@ const isEditOpen = ref(false);
             >{{ tracker.name }}</Link>
             <p class="text-sm">{{ tracker.category.name }}</p>
             <p
-                v-if="tracker.next_appointment_at"
+                v-if="nextAppointment"
                 class="mt-1 text-sm text-muted-foreground"
             >
-                Next appointment: {{ tracker.next_appointment_at }}
+                Next appointment: {{ formatDate(nextAppointment.appointment_at) }}
             </p>
         </div>
         <div class="flex gap-2">

@@ -26,16 +26,6 @@ defineProps<{
             {{ errors.name }}
         </div>
         <Input type="text" name="name" placeholder="Tracker name" />
-        <div class="flex flex-col gap-1">
-            <label for="next_appointment_at" class="text-sm"
-                >Next appointment (optional)</label
-            >
-            <Input
-                type="datetime-local"
-                name="next_appointment_at"
-                id="next_appointment_at"
-            />
-        </div>
         <Select name="category">
             <SelectTrigger>
                 <SelectValue placeholder="Select category" />

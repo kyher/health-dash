@@ -11,11 +11,7 @@ class Tracker extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'category_id', 'next_appointment_at'];
-
-    protected $casts = [
-        'next_appointment_at' => 'date:Y-m-d H:i',
-    ];
+    protected $fillable = ['name', 'category_id'];
 
     public function user(): BelongsTo
     {
@@ -30,5 +26,10 @@ class Tracker extends Model
     public function notes(): HasMany
     {
         return $this->hasMany(TrackerNote::class);
+    }
+
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(TrackerAppointment::class)->orderBy('appointment_at');
     }
 }

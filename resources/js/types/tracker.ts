@@ -9,10 +9,15 @@ export type TrackerNote = {
     created_at: string;
 };
 
+export type TrackerAppointment = {
+    id: number;
+    appointment_at: string;
+};
+
 export type Tracker = {
     id: number;
     name: string;
     category: Category;
-    next_appointment_at: string | null;
     notes: TrackerNote[];
+    appointments: TrackerAppointment[];
 };

@@ -96,35 +96,4 @@ class StoreTrackerControllerTest extends TestCase
             'name' => 'No Category',
         ]);
     }
-
-    #[Test]
-    public function test_store_tracker_with_next_appointment_at()
-    {
-        $this->actingAs(User::factory()->create());
-        $response = $this->followingRedirects()->post(route('tracker.store'), [
-            'name' => 'New Tracker',
-            'category' => 1,
-            'next_appointment_at' => '2026-05-01 09:00',
-        ]);
-
-        $response->assertStatus(200);
-        $this->assertDatabaseHas('trackers', [
-            'name' => 'New Tracker',
-            'next_appointment_at' => '2026-05-01 09:00',
-        ]);
-    }
-
-    #[Test]
-    public function test_store_tracker_with_invalid_next_appointment_at()
-    {
-        $this->actingAs(User::factory()->create());
-        $response = $this->post(route('tracker.store'), [
-            'name' => 'New Tracker',
-            'category' => 1,
-            'next_appointment_at' => 'not-a-date',
-        ]);
-
-        $response->assertRedirect();
-        $response->assertSessionHasErrors(['next_appointment_at']);
-    }
 }

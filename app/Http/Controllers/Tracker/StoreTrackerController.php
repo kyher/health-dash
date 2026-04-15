@@ -21,7 +21,7 @@ class StoreTrackerController extends Controller
 
         $category = TrackerCategory::findOrFail($request->category);
 
-        $createTrackerAction($user, $category, $request->name, $request->next_appointment_at);
+        $createTrackerAction($user, $category, $request->name);
 
         inertia()->flash([
             'toast' => [
